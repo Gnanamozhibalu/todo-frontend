@@ -13,14 +13,13 @@ class TodoList extends React.Component {
 
   handleDelete = (id) => {
     let update = this.props.tasks.filter(
-      (task) => task.id !== id
+      (task) => task._id !== id
     );
     this.props.onDelete(update,id);
   };
 
   render = () => {
-    console.log(this.props);
-
+   // console.log(this.props.tasks);
     return (
       <ul className="list-group">
         {this.props.tasks.map((item, index) => {
@@ -29,7 +28,7 @@ class TodoList extends React.Component {
               <li className="col-11 list-group-item">{item.items}</li>
               <button
                 className="btn btn-danger m-1"
-                onClick={() => this.handleDelete(item.id)}
+                onClick={() => this.handleDelete(item._id)}
               >
                 <i className="fa fa-trash fa-lg" aria-hidden="true"></i>
               </button>

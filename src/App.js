@@ -7,21 +7,18 @@ class App extends React.Component {
   //items = ["Watch a movie", "running in morning", "Don't Sleep"];
   state = {
     /* items: ["Watch a movie", "running in morning", "Don't Sleep"], */
-    items: [
-      /*  { id: 1, title: "Watch a movie" },
-      { id: 2, title: "running in morning" },
-      { id: 3, title: "Don't Sleep" }, */
-    ],
+    items:[]
   };
   componentDidMount = () => {
     //ajax
     fetch("https://todo-backend-mongodb.herokuapp.com/list")
       .then((response) => response.json())
       .then((data) =>{
+       // console.log(data.data);
         this.setState({
-          items: data,
+          items: data.data,
         })
-        console.log(data);
+        console.log(data.tasks.data);
       } 
       )
       .catch((err) => {
@@ -32,7 +29,7 @@ class App extends React.Component {
   handleSubmit = (task) => {
     /*     this.setState({ items: [...this.state.items, task] }); */
     // const id = Math.floor(Math.random() * 100) + 1;
-    const data = { title: task };
+    const data = { items: task };
     fetch("https://todo-backend-mongodb.herokuapp.com/", {
       method: "POST", // or 'PUT'
       headers: {
@@ -41,8 +38,7 @@ class App extends React.Component {
       body: JSON.stringify(data),
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
+      .then(() => {
         this.setState({ items: [...this.state.items, data] });
       })
       .catch((error) => {
@@ -52,13 +48,13 @@ class App extends React.Component {
 
   handleDelete = (val,id) => {
     /* console.log(val);
-    console.log(id); */
+    console.log(id);  */
     fetch("https://todo-backend-mongodb.herokuapp.com" + "/" + id, {
       method: "delete",
     })
       .then((response) => response.json())
       .then(() => {
-        console.log("Success:");
+        console.log("message:Success");
         this.setState({ items: val });
       });
   };
