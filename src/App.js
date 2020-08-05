@@ -15,7 +15,7 @@ class App extends React.Component {
   };
   componentDidMount = () => {
     //ajax
-    fetch("http://localhost:3000/list")
+    fetch("https://todo-backend-mongodb.herokuapp.com/list")
       .then((response) => response.json())
       .then((data) =>{
         this.setState({
@@ -33,7 +33,7 @@ class App extends React.Component {
     /*     this.setState({ items: [...this.state.items, task] }); */
     // const id = Math.floor(Math.random() * 100) + 1;
     const data = { title: task };
-    fetch("http://localhost:3000/", {
+    fetch("https://todo-backend-mongodb.herokuapp.com/", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ class App extends React.Component {
   handleDelete = (val,id) => {
     /* console.log(val);
     console.log(id); */
-    fetch("http://localhost:4040/items" + "/" + id, {
+    fetch("https://todo-backend-mongodb.herokuapp.com" + "/" + id, {
       method: "delete",
     })
       .then((response) => response.json())
